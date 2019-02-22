@@ -14,7 +14,7 @@
 
 * server2(阿里云):www.jiangliang738.cn
 
-**在代理服务器中**
+**在代理服务器Eden中**
 ```
 vim /etc/nginx/nginx.conf
 ```
@@ -57,3 +57,5 @@ location / {
 ```
 nginx -s reload
 ```
+
+* 即可开启代理，也就是服务器轮巡
