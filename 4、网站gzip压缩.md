@@ -57,4 +57,4 @@ service nginx restart
 nginx -s reload
 ```
 
-* 成功配置
+* 配置成功
