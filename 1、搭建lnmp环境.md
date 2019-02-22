@@ -30,8 +30,12 @@ tar -jxvf php-7.2.6.tar.bz2
 **因为PHP7基于gcc和libxml2,autoconfig**
 
 ```
-yum install gcc gcc-g++ autoconfig automake
-
+yum install gcc
+```
+```
+yum -y install m4 autoconf
+```
+```
 yum -y install libxml2 libxml2-devel
 ```
 
