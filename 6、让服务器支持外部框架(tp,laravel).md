@@ -48,3 +48,8 @@ vim /etc/nginx/conf.d/default.conf
 ````
 nginx -s reload
 ````
+
+* or
+```
+service nginx restart
+```
