@@ -159,4 +159,26 @@ source ~/.bash_profile
 php -v
 ```
 
+**修改php-fpm配置**
+```
+vim /etc/php-fpm.d/www.conf
+```
+
+```
+user = nginx
+; RPM: Keep a group allowed to write in log dir
+group = nginx
+```
+
+**重启php-fpm和nginx即可**
+```
+service php-fpm start
+```
+```
+chkconfig php-fpm on
+```
+```
+service nginx restart
+```
+
 
