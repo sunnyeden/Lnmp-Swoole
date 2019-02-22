@@ -1,13 +1,85 @@
-### 安装nginx服务器
-
-
-### 安装PHP7.2.6
+### 安装mysql(因为安装nginx服务器要先安装,均在/usr/local/src文件夹中操作)
 
 **首先安装wget**
 
 ```
 yum -y install wget
 ```
+
+**安装mysql(5.1.73)**
+
+```
+yum -y install mysql mysql-server mysql-devel
+```
+
+**安装mysql字符乱码包**
+
+```
+chmod 777 mysql.sh
+```
+```
+./mysql.sh
+```
+
+**修改mysql登陆密码**
+```
+mysqladmin -uroot password [密码]
+```
+
+**查看字符集是否修改正确**
+```
+show variables like "%char%";
+```
+
+### 安装nginx服务器
+
+**查看一个网站是否使用nginx服务器**
+
+```
+curl -I -H "Accept-Encoding: gzip, deflate" "http://www.jiangliang738.cn"
+```
+
+**安装atomic协议**
+```
+wget http://www.atomicorp.com/installers/atomic
+```
+
+**修改文件权限**
+```
+chmod 777 atomic
+```
+
+**运行文件，一路回车**
+```
+./atomic
+```
+
+**更新yum源**
+```
+yum check-update
+```
+
+**安装Nginx**
+```
+yum -y install nginx
+```
+
+**上传nginx脚本，并修改权限**
+
+```
+chmod 777 ./nginx.sh
+```
+
+```
+./nginx.sh
+```
+
+**启动nginx即可**
+```
+service nginx start
+```
+
+### 安装PHP7.2.6
 
 **下载php7.2.6**
 ```
