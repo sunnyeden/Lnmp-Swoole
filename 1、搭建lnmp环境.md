@@ -81,6 +81,11 @@ service nginx start
 
 ### 安装PHP7.2.6
 
+**安装php-fpm**
+```
+yum -y install --enablerepo=remi --enablerepo=remi-php56 php-fpm
+```
+
 **下载php7.2.6**
 ```
 wget http://cn2.php.net/distributions/php-7.2.6.tar.gz
