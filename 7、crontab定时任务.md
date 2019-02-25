@@ -20,7 +20,7 @@ chkconfig crond on
 crontab -e
 ```
 
-**如创建每个1分钟写log**
+**如创建每隔1分钟写log**
 ```
 * * * * * echo "log" > /var/www/html/log.txt
 ```
