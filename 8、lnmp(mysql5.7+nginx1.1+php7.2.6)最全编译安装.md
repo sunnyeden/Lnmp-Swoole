@@ -1,49 +1,64 @@
 ## lnmp(mysql5.7+nginx1.1+php7.2.6)最新编译安装
+```php
+/* *
+ * 功能：lnmp(mysql5.7+nginx1.1+php7.2.6)最新编译安装
+ * 版本：1.0
+ * 作者：江亮（Eden）
+ * github：https://github.com/sunnyeden
+ * 修改日期：2019-02-27
+ * 说明：
+ * 网络上面lnmp的安装有各种各样的坑，因此自己结合几篇正规的文档和个人经验，已将环境完整搭建在自己的阿里云服务器上
+ *
+ *************************页面功能说明*************************
+ * 因为步骤比较多，因此我操作yum的时候，格式如下:
+ * [root@eden  完整路径(为了防止大家操作路径不对)] 操作命令
+ */
+```
 
 ### 安装mysql,首先要启用MySQL5.7的源
 
 > ### CentOS6.x 版本方案
 ```
 # 安装MySQL的yum源，下面是RHEL6系列的下载地址  
-rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm  
+[root@eden /] rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm  
 
 # 安装yum-config-manager  
-yum install yum-utils -y  
+[root@eden /] yum install yum-utils -y  
 
 # 禁用MySQL5.6的源  
-yum-config-manager --disable mysql56-community  
+[root@eden /] yum-config-manager --disable mysql56-community  
 
 # 启用MySQL5.7的源  
-yum-config-manager --enable mysql57-community-dmr  
+[root@eden /] yum-config-manager --enable mysql57-community-dmr  
 
 # 用下面的命令查看是否配置正确 如果展示出来的信息显示为5.7则正确
-yum repolist enabled | grep mysql 
+[root@eden /] yum repolist enabled | grep mysql 
 ```
 **CentOS7.x 版本方案**
 ```
 # 下载mysql源安装包
-wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
+[root@eden /] wget http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm
 
 # 安装mysql源
-yum localinstall mysql57-community-release-el7-8.noarch.rpm
+[root@eden /] yum localinstall mysql57-community-release-el7-8.noarch.rpm
 
 # 检查mysql源是否安装成功
-yum repolist enabled | grep "mysql.*-community.*"
+[root@eden /] yum repolist enabled | grep "mysql.*-community.*"
 ```
 
 * 修改vim /etc/yum.repos.d/mysql-community.repo源，改变默认安装的mysql版本。比如要安装5.6版本，将5.7源的enabled=1改成enabled=0。然后再将5.6源的enabled=0改成enabled=1即可。
 
 > ### 关闭Linux的防火墙机制
 ```
-service iptables stop
+[root@eden /] service iptables stop
 ```
 ```
-chkconfig iptables off
+[root@eden /] chkconfig iptables off
 ```
 
 > ### 关闭Linux子安全系统selinux
 ```
-vim /etc/selinux/config
+[root@eden /] vim /etc/selinux/config
 ```
 ```
 selinux = disabled
@@ -52,21 +67,21 @@ selinux = disabled
 > ### 安装Mysql
 
 ```
-yum -y install mysql mysql-server mysql-devel
+[root@eden /] yum -y install mysql mysql-server mysql-devel
 ```
 
 > ### 启动mysql【重点】
 ```
 # 启动mysqld
-service mysqld start
+[root@eden /] service mysqld start
 
 # 查看mysql自动为你生成的随机密码
-grep "password" /var/log/mysqld.log
+[root@eden /] grep "password" /var/log/mysqld.log
 ```
 > 2019-02-27T07:28:10.788945Z 1 [Note] A temporary password is generated for root@localhost: 5TqKgrWDj=iq
 ```
 # 使用mysql生成的随机密码登录
-mysql -u root -p
+[root@eden /] mysql -u root -p
 
 # 设置你的新密码
 set password=password('新密码');
@@ -119,32 +134,32 @@ set collation_connection=utf8_unicode_ci;
 > ### 查看一个网站是否使用nginx服务器
 
 ```
-curl -I -H "Accept-Encoding: gzip, deflate" "http://www.jiangliang738.cn"
+[root@eden /] curl -I -H "Accept-Encoding: gzip, deflate" "http://www.jiangliang738.cn"
 ```
 
 > ### [安装atomic协议](http://www.atomicorp.com/installers)
 ```
-wget -q -O - http://www.atomicorp.com/installers/atomic | sh
+[root@eden /] wget -q -O - http://www.atomicorp.com/installers/atomic | sh
 ```
 
 **更新yum源**
 ```
-yum check-update
+[root@eden /] yum check-update
 ```
 
 **安装Nginx**
 ```
-yum -y install nginx
+[root@eden /] yum -y install nginx
 ```
 
 > ### 上传nginx脚本，并修改权限（可省略）
 
 ```
-chmod 777 ./nginx.sh
+[root@eden /usr/local/src/] chmod 777 ./nginx.sh
 ```
 
 ```
-./nginx.sh
+[root@eden /usr/local/src/]./nginx.sh
 ```
 
 **启动nginx即可**
@@ -162,17 +177,19 @@ yum -y install wget unzip gzip vim
 
 > ### [下载php7.2.6源码包,public文件夹中有一份](http://www.php.net/downloads.php)，或者执行下面命令，但是下载很慢
 ```
-wget http://cn2.php.net/distributions/php-7.2.6.tar.gz
+# 文件上传到/usr/local/src文件夹下
+
+[root@eden /usr/local/src/] wget http://cn2.php.net/distributions/php-7.2.6.tar.gz
 ```
 
 > ### 进行解压gz包
 ```
-tar -zxvf php-7.2.6.tar.gz
+[root@eden /usr/local/src/] tar -zxvf php-7.2.6.tar.gz
 ```
 
 > ### 如果下载的是bz2文件包
 ```
-tar -jxvf php-7.2.6.tar.bz2
+[root@eden /usr/local/src/] tar -jxvf php-7.2.6.tar.bz2
 ```
 > ### 进行下一步之前要安装很多依赖，不然会有很多错误，请依次执行，上面是报错，下面的yum是解决方式
 ```
@@ -228,9 +245,9 @@ yum install -y gcc
 yum -y install m4 autoconf
 ```
 
-> ### 转移文件(./configure --prefix=目标文件夹)【重点】
+> ### 文件配置编译(./configure --prefix=目标文件夹)【重点】
 ```
-./configure \
+[root@eden /usr/local/src/php7.2.6/] ./configure \
 --prefix=/usr/local/php7 \
 --with-config-file-path=/etc \
 --enable-fpm \
@@ -302,20 +319,21 @@ yum -y install m4 autoconf
 
 > ### 进行编译安装，这里配置要很久，稍微等待一下
 ```
-make && make install
+[root@eden /usr/local/src/php7.2.6/] make && make install
 ```
 
 > ### 添加PHP到环境变量
 ```
-vim ~/.bash_profile
+[root@eden /usr/local/src/php7.2.6/] vim ~/.bash_profile
 ```
+> ### 在最后一行加上，即可
 ```
 alias php=/usr/local/php7/lib/php
 ```
 
 > ### 使得环境变量生效
 ```
-source ~/.bash_profile
+[root@eden /usr/local/src/php7.2.6/] source ~/.bash_profile
 ```
 
 > ### 查看PHP版本，安装成功
@@ -323,20 +341,24 @@ source ~/.bash_profile
 php -v
 ```
 
-### 配置php-fpm【重点】
+### 配置php-fpm【重点】，因为比较重要，一定要看清楚前面的操作路径
 
 > ### 生成php.ini文件
 
 ```
-[root@  selinux] cp php.ini-production /etc/php.ini
+[root@eden /usr/local/src/php7.2.6/] cp php.ini-production /etc/php.ini
 ```
 
 ```
-# cp /usr/local/php/etc/php-fpm.conf.default /usr/local/php/etc/php-fpm.conf
+[root@eden /usr/local/php7/etc/] cp php-fpm.conf.default ./php-fpm.conf
 
-# cp /usr/local/php/etc/php-fpm.d/www.conf.default /usr/local/php/etc/php-fpm.d/www.conf
-# cp sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-# chmod +x /etc/init.d/php-fpm
+[root@eden /usr/local/php7/etc/php-fpm.d/] cp www.conf.default ./www.conf
+
+[root@eden /usr/local/src/php7.2.6/sapi/fpm/] cp init.d.php-fpm /etc/init.d/php-fpm
+```
+> ### 分配php-fpm权限
+```
+chmod +x /etc/init.d/php-fpm
 ```
 
 > ### 启动php-fpm
@@ -396,7 +418,7 @@ server {
 }
 ```
 
-**因为nginx服务器不会自动创建/var/www/html文件夹，如果你还是习惯在此文件夹中写代码，只要将上面的root定位到这里即可，然后自己区创建该文件夹**
+**因为nginx服务器不会自动创建/var/www/html文件夹，如果你还是习惯在此文件夹中写代码，只要将上面的root定位到这里即可，然后自己去创建该文件夹即可**
 
 
 
