@@ -20,7 +20,7 @@ tar -zxvf v1.9.1-stable.tar.gz
 
 **通过PHP的phpize文件生成swoole的配置文件**
 ```
-[root@localhost swoole]# /usr/local/bin/php7/bin/phpize
+[root@localhost swoole]# /usr/local/php7/bin/phpize
 ```
 
 **安装autoconf**
@@ -31,7 +31,7 @@ yum -y install m4 autoconf
 
 **配置**
 ```
-./configure --with-php-config=/usr/local/bin/php7/bin/php-config
+./configure --with-php-config=/usr/local/php7/bin/php-config
 ```
 
 **安装gcc-c++**
@@ -46,7 +46,7 @@ make && make install
 
 **修改PHP配置文件，开启swoole扩展**
 ```
-vim /usr/local/bin/php7/lib/php.ini
+vim /usr/local/php7/lib/php.ini
 ```
 ```
 909 extension=swoole
