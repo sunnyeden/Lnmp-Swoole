@@ -339,9 +339,18 @@ yum -y install m4 autoconf
 ```
 [root@eden /usr/local/src/php7.2.6/] vim ~/.bash_profile
 ```
-> ### 在最后一行加上，即可
+> ### 在最后一行加上，即可,(如果不行，整行复制代替)
 ```
-alias php=/usr/local/php7/lib/php
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+PATH=$PATH:$HOME/bin
+
+export PATH
+alias php=/usr/local/php7/bin/php
 ```
 
 > ### 使得环境变量生效
