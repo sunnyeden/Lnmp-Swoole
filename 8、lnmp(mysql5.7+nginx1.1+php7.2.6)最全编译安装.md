@@ -163,9 +163,22 @@ set collation_connection=utf8_unicode_ci;
 ```
 
 **启动nginx即可**
+
+* CentOS6.x
 ```
 service nginx start
 ```
+
+* CentOS7.x
+```
+systemctl start nginx
+```
+
+* 通用
+```
+nginx -s reload
+```
+
 
 ### 安装php7.2.6
 
