@@ -188,7 +188,7 @@ nginx -s reload
 yum -y install wget unzip gzip vim
 ```
 
-> ### [下载php7.2.6源码包,public文件夹中有一份](http://www.php.net/downloads.php)，或者执行下面命令，但是下载很慢(运行了别怪我没提醒，还是下载，然后手动上传吧)
+> ### [下载php7.2.6源码包,public文件夹中有一份](http://www.php.net/downloads.php)，或者执行下面命令，但是下载很慢(运行了别怪我没提醒，还是手动上传吧)
 ```
 # 文件上传到/usr/local/src文件夹下
 
