@@ -152,7 +152,7 @@ set collation_connection=utf8_unicode_ci;
 [root@eden /] yum -y install nginx
 ```
 
-> ### 上传nginx脚本，并修改权限（可省略）
+> ### 上传nginx脚本，并修改权限(如果执行错误，请用编辑器查看.sh文件，主要是替换两个文件。手动替换就行)
 
 ```
 [root@eden /usr/local/src/] chmod 777 ./nginx.sh
@@ -369,7 +369,7 @@ chmod +x /etc/init.d/php-fpm
 
 ### 配置nginx,访问自己网址
 ```
-vim /etc/nginx/conf.d/config
+vim /etc/nginx/conf.d/default.conf
 ```
 
 > ### 配置如下
