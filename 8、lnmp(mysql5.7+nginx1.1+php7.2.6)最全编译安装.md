@@ -369,7 +369,7 @@ php -v
 
 ```
 #一定要放在lib文件夹中，不然后续添加扩展将会失败
-[root@eden /usr/local/src/php7.2.6/] cp php.ini-production /usr/local/php7/lib/php.ini
+[root@eden /usr/local/src/php7.2.6/] cp php.ini-production /etc/php.ini
 ```
 
 ```
