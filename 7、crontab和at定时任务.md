@@ -56,11 +56,6 @@ apt-get install at;
 chkconfig atd on
 ```
 
-**将其加入开机自启动**
-```
-chkconfig atd on
-```
-
 **at设置时间的格式**
 ```
 Minute    at now + 5 minutes   任务在5分钟后运行
