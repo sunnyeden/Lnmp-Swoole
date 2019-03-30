@@ -69,12 +69,6 @@ server {
             #proxy_pass http://web/;
     #}
 
-    #nginx的访问日志
-    access_log /var/www/html/log/access_log main;
-
-    #nginx的错误日志
-    error_log  /var/www/html/log/error_log;
-
     #php-ftm配置
     location ~ \.php$ {
         fastcgi_pass   127.0.0.1:9000;
